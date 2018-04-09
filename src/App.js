@@ -4,9 +4,9 @@ import { Switch, Route } from 'react-router';
 import routes from './routes';
 
 const App = () => (
-    <Switch>
-        { routes.map((route, i) => <Route key={i} {...route} />) }
-    </Switch>
+  <Switch>
+    { routes.map(({ ...name, ...routeProps }) => <Route key={name} {...routeProps} />) }
+  </Switch>
 );
 
 export default App;

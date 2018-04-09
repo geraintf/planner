@@ -1,25 +1,25 @@
-const webpack = require("webpack");
+const webpack = require('webpack');
 
 const ENV = process.env.NODE_ENV;
 const PRODUCTION = ENV === 'production';
 
 const browserConfig = {
-  entry: "./src/client/index.js",
+  entry: './src/client/index.js',
   output: {
     path: __dirname,
-    filename: "./public/bundle.js"
+    filename: './public/bundle.js',
   },
   mode: PRODUCTION ? 'production' : 'development',
-  devtool: "cheap-module-source-map",
+  devtool: 'cheap-module-source-map',
   module: {
     rules: [
       {
         test: /js$/,
         exclude: /(node_modules)/,
-        loader: "babel-loader",
-        query: { presets: ["react-app"] }
-      }
-    ]
+        loader: 'babel-loader',
+        query: { presets: ['react-app'] },
+      },
+    ],
   },
   plugins: [
     new webpack.DefinePlugin({
@@ -28,30 +28,30 @@ const browserConfig = {
         BROWSER: JSON.stringify(true),
       },
     }),
-    //['babel-plugin-styled-components']
-  ]
+    // ['babel-plugin-styled-components']
+  ],
 };
 
 const serverConfig = {
-  entry: "./src/server/index.js",
-  target: "node",
+  entry: './src/server/index.js',
+  target: 'node',
   mode: PRODUCTION ? 'production' : 'development',
   output: {
     path: __dirname,
-    filename: "server.js",
-    libraryTarget: "commonjs2"
+    filename: 'server.js',
+    libraryTarget: 'commonjs2',
   },
-  devtool: "cheap-module-source-map",
+  devtool: 'cheap-module-source-map',
   module: {
     rules: [
       {
         test: /js$/,
         exclude: /(node_modules)/,
-        loader: "babel-loader",
-        query: { presets: ["react-app"] }
-      }
-    ]
-  }
+        loader: 'babel-loader',
+        query: { presets: ['react-app'] },
+      },
+    ],
+  },
 };
 
 module.exports = [browserConfig, serverConfig];

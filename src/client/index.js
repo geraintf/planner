@@ -1,15 +1,15 @@
-import React from "react";
-import { render } from "react-dom";
-import { Provider } from "react-redux";
+import React from 'react';
+import { render } from 'react-dom';
+import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
-import { clientStore } from "../configureStores";
+import { clientStore } from '../configureStores';
 
-import App from "../App";
+import App from '../App';
 
-const store = clientStore(window.__initialState__);
-delete window.__initialState__;
+const store = clientStore(window.__initialState__); // eslint-disable-line no-underscore-dangle
+delete window.__initialState__; // eslint-disable-line no-underscore-dangle
 
-const MOUNT_NODE = document.getElementById("root");
+const MOUNT_NODE = document.getElementById('root');
 
 render(
   <Provider store={store}>
@@ -17,4 +17,5 @@ render(
       <App />
     </BrowserRouter>
   </Provider>
-  , MOUNT_NODE);
+  , MOUNT_NODE,
+);

@@ -1,20 +1,18 @@
-import { createStore, applyMiddleware } from "redux";
+import { createStore, applyMiddleware } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
-import thunk from "redux-thunk";
-import reducer from "./reducers";
+import thunk from 'redux-thunk';
+import reducer from './reducers';
 
-const getDefaultState = req => ({});
+const getDefaultState = () => ({});
 
 const configureStore = (initialState, req = {}) => {
-    const enchancers = composeWithDevTools(
-        applyMiddleware(thunk)
-    );
+  const enchancers = composeWithDevTools(applyMiddleware(thunk));
 
-    return createStore(
-        reducer,
-        Object.assign({}, getDefaultState(req), initialState),
-        enchancers
-    );
+  return createStore(
+    reducer,
+    Object.assign({}, getDefaultState(req), initialState),
+    enchancers,
+  );
 };
 
 export const clientStore = initialState => configureStore(initialState);

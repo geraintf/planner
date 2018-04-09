@@ -2,10 +2,11 @@ import Pages from './client/pages';
 
 const routes = [
   {
+    name: 'main',
     path: '/',
     component: Pages.Main,
-    exact: true
-  }
+    exact: true,
+  },
 ];
 
 export default routes;
