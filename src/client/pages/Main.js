@@ -16,7 +16,7 @@ const Main = () => (
         <DayTodoContainer />
       </div>
       <div className="day-notes-grid-item">
-        <textarea/>
+        <textarea />
       </div>
 
       <div className="calender-grid-item">

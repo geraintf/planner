@@ -12,3 +12,11 @@ export const addTodo = text => ({
     text
   }
 });
+
+export const moveTodo = (oldIndex, newIndex) => ({
+  type: 'MOVE_TODO',
+  payload: {
+    oldIndex,
+    newIndex
+  }
+});

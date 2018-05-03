@@ -1,4 +1,5 @@
 import uuidv4 from 'uuid/v4';
+import { arrayMove } from 'react-sortable-hoc';
 
 const toggleTodo = (todos, id) => (
   todos.map(todo => (
@@ -29,6 +30,11 @@ export default function reducer(state = {}, { type, payload }) {
             text: payload.text,
             completed: false
           }]
+      };
+    case 'MOVE_TODO':
+      return {
+        ...state,
+        todos: arrayMove(state.todos, payload.oldIndex, payload.newIndex)
       };
     default:
       return state;

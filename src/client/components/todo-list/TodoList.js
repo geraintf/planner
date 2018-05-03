@@ -1,11 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import List from '../todo/TodoList';
-import Todo from '../todo/Todo';
+import List from '../todo/todo-list/TodoList';
+import TodoItem from '../todo/todo-item/TodoItem';
 
 const TodoList = () => {
-
   const todos = [
     {
       id: 'fwefwef',
@@ -28,13 +27,12 @@ const TodoList = () => {
     <List>
       {
         todos.map((props) => {
-          <Todo {...props} />
+          <TodoItem {...props} />;
         })
       }
     </List>
 
-  )
-
+  );
 };
 
 TodoList.propTypes = {};
