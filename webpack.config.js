@@ -14,11 +14,20 @@ const browserConfig = {
   module: {
     rules: [
       {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader']
+      },
+      {
+        test: /\.less$/,
+        use: ['style-loader', 'css-loader', 'less-loader'],
+      },
+      {
         test: /js$/,
         exclude: /(node_modules)/,
         loader: 'babel-loader',
         query: { presets: ['react-app'] },
       },
+
     ],
   },
   plugins: [
@@ -27,8 +36,7 @@ const browserConfig = {
         NODE_ENV: JSON.stringify(ENV),
         BROWSER: JSON.stringify(true),
       },
-    }),
-    // ['babel-plugin-styled-components']
+    })
   ],
 };
 
@@ -48,7 +56,15 @@ const serverConfig = {
         test: /js$/,
         exclude: /(node_modules)/,
         loader: 'babel-loader',
-        query: { presets: ['react-app'] },
+        query: { presets: ['react-app'] }
+      },
+      {
+        test: /\.css$/,
+        use: ['css-loader']
+      },
+      {
+        test: /\.less$/,
+        use: ['css-loader', 'less-loader'],
       },
     ],
   },

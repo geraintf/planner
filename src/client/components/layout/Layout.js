@@ -1,8 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import './Layout.less';
+
 const Layout = props => (
-  <div>
+  <div className="default-layout">
     { props.children }
   </div>
 );

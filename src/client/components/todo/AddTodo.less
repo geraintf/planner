@@ -1,0 +1,32 @@
+
+.add-todo {
+  position: relative;
+  opacity: 0.5;
+  transition: opacity 200ms ease-in;
+
+  &:hover {
+    transition: opacity 100ms ease-in;
+    opacity: 1;
+  }
+
+  button {
+    border-radius: 0;
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    &:focus {
+      box-shadow: none;
+      opacity: 1;
+    }
+  }
+
+  .form-control {
+    border-radius: 0;
+
+    &:focus {
+      border: 1px solid #ced4da;
+      box-shadow: none;
+    }
+  }
+}
