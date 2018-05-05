@@ -12,11 +12,11 @@ const TodoList = ({
 }) => (
   <ul className="todo-list">
     {
-      items.map(({ id, ...props }, index) => (
+      items.map((itemProps, index) => (
         <TodoItem
-          key={id}
-          {...props}
-          onClick={() => toggleTodo(id)}
+          key={itemProps.id}
+          {...itemProps}
+          onClick={() => toggleTodo(itemProps.id)}
           sortable={sortable}
           index={index}
         />

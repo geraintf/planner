@@ -1,45 +1,80 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
+import { connect } from 'react-redux';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import faLines from '@fortawesome/fontawesome-free-solid/faAlignJustify';
 import faCheck from '@fortawesome/fontawesome-free-solid/faCheck';
 import { SortableElement, SortableHandle } from 'react-sortable-hoc';
 
-import { decodeString } from '../../../../shared/string-utils';
+import { editTodo } from '../../../../actions';
+import { decodeString } from '../../../../utils/string-utils';
 import './TodoItem.less';
+import TodoUtilsMenu from "../todo-utils-menu/TodoUtilsMenu";
+import EditableTextArea from '../../editable-text-area/EditableTextArea';
 
-const TodoItem = ({
-  text,
-  completed,
-  onClick,
-  sortable,
-  index
-}) => {
-  let TodoContent = () => (
-    <li className={classnames('todo-item', { completed })}>
-      <button
-        onClick={onClick}
-      >
-        {
-          completed &&
-          <FontAwesomeIcon icon={faCheck} />
-        }
-      </button>
-      <span className="todo-item__content">
-        {decodeString(text)}
-      </span>
-    </li>
-  );
+class TodoItem extends Component {
+  static propTypes = {
+    completed: PropTypes.bool,
+    editTodo: PropTypes.func.isRequired,
+    text: PropTypes.string.isRequired,
+    onClick: PropTypes.func.isRequired,
+    index: PropTypes.number.isRequired,
+    id: PropTypes.string.isRequired
+  };
 
-  const MoveIcon = SortableHandle(() => (
-    <div className="todo-item__move">
-      <FontAwesomeIcon icon={faLines} />
-    </div>
-  ));
+  static defaultProps = {
+    completed: false,
+    sortable: false
+  };
 
-  if (sortable) {
-    TodoContent = SortableElement(() => (
+  state = {
+    editing: false
+  };
+
+  toggleEditing = () => this.setState({ editing: !this.state.editing });
+
+  handleEdit = (event) => this.props.editTodo(this.props.id, event.target.value);
+
+  handleKeyPress = (event) => {
+    if (event.type === 'keypress' && event.key === 'Enter') {
+      this.toggleEditing();
+    }
+  };
+
+  render() {
+    const {
+      text,
+      completed,
+      onClick,
+      index,
+      id
+    } = this.props;
+
+    const TodoField = () => {
+
+      const decodedText = decodeString(text);
+
+      if (this.state.editing) {
+        return <EditableTextArea
+          onBlur={this.toggleEditing}
+          onChange={this.handleEdit}
+          onKeyPress={this.handleKeyPress}
+          text={decodedText}
+        />;
+      } else {
+        return decodedText;
+      }
+
+    };
+
+    const MoveIcon = SortableHandle(() => (
+      <div className="todo-item__move">
+        <FontAwesomeIcon icon={faLines} />
+      </div>
+    ));
+
+    const TodoContent = SortableElement(() => (
       <li className={classnames('todo-item', { completed })}>
         <button
           onClick={onClick}
@@ -49,30 +84,22 @@ const TodoItem = ({
             <FontAwesomeIcon icon={faCheck} />
           }
         </button>
-        <span className="todo-item__content">
-          {decodeString(text)}
+        <span
+          className="todo-item__content"
+          onDoubleClick={this.toggleEditing}
+        >
+          <TodoField />
         </span>
 
-        <MoveIcon />
-
+        <div className="todo-item__utils">
+          <TodoUtilsMenu todoId={id} toggleEditing={this.toggleEditing} />
+          <MoveIcon />
+        </div>
       </li>
     ));
+
+    return <TodoContent key={`item-${index}`} index={index} />;
   }
+}
 
-  return <TodoContent key={`item-${index}`} index={index} />;
-};
-
-TodoItem.propTypes = {
-  completed: PropTypes.bool,
-  text: PropTypes.string.isRequired,
-  onClick: PropTypes.func.isRequired,
-  sortable: PropTypes.bool,
-  index: PropTypes.number.isRequired
-};
-
-TodoItem.defaultProps = {
-  completed: false,
-  sortable: false
-};
-
-export default TodoItem;
+export default connect(null, { editTodo })(TodoItem)

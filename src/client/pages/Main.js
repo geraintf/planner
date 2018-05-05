@@ -1,6 +1,7 @@
 import React from 'react';
 import Layout from '../components/layout/Layout';
 import DayTodoContainer from '../containers/day-todo';
+import SectionHeader from '../components/section-header/SectionHeader';
 
 const Main = () => (
   <Layout>
@@ -13,6 +14,7 @@ const Main = () => (
       </div>
 
       <div className="day-todo-grid-item">
+        <SectionHeader text="Todos" />
         <DayTodoContainer />
       </div>
       <div className="day-notes-grid-item">

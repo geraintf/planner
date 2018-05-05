@@ -8,9 +8,9 @@
 
   .todo-item__content {
     margin-left: 40px;
-    margin-right: 55px;
+    margin-right: 62px;
     padding: 8px 0 8px 15px;
-    display: inline-block;
+    display: block;
   }
 
   &.completed {
@@ -52,15 +52,20 @@
   }
 
   .todo-item__move {
+    cursor: move;
+    display: inline-block;
+  }
+
+  .todo-item__utils {
     position: absolute;
     right: 0;
     top: 0;
-    cursor: grabbing;
     height: 100%;
+    width: 62px;
   }
 
   .fa-align-justify {
-    margin: 12px 13px 0 13px;
+    margin: 12px 13px 0 6px;
     color: #cacaca;
   }
 }

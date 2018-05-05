@@ -26,7 +26,6 @@ const DayTodoContainer = ({
     toggleTodo={toggleTodo}
     addTodo={addTodo}
     moveTodo={moveTodo}
-    sortable
   />
 );
 
