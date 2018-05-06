@@ -1,6 +1,6 @@
 import React from 'react';
 import Layout from '../components/layout/Layout';
-import DayTodoContainer from '../containers/day-todo';
+import DayTodoContainer from '../containers/todo-for-day';
 import SectionHeader from '../components/section-header/SectionHeader';
 
 const Main = () => (
