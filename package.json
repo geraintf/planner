@@ -18,7 +18,8 @@
     "verbose": true,
     "moduleNameMapper": {
       "\\.(css|less)$": "<rootDir>/test/__mocks__/styleMock.js"
-    }
+    },
+    "snapshotSerializers": ["enzyme-to-json/serializer"]
   },
   "dependencies": {
     "@fortawesome/fontawesome": "^1.1.6",
@@ -35,6 +36,7 @@
     "cross-env": "^5.1.4",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
+    "enzyme-to-json": "^3.3.3",
     "express": "^4.16.3",
     "html-entities": "^1.2.1",
     "less": "^3.0.2",

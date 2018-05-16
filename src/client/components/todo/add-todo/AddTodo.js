@@ -33,12 +33,6 @@ export default class AddTodo extends Component {
     }
   };
 
-  handleClick = (event) => {
-    event.preventDefault();
-
-    this.handleAdd(event);
-  };
-
   handleOnChange = (event) => this.setState({ value: event.target.value });
 
   render() {

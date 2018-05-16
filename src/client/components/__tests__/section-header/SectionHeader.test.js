@@ -1,30 +1,21 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import renderer from 'react-test-renderer';
 
 import SectionHeader from '../../section-header/SectionHeader';
 
 describe('SectionHeader', () => {
-  const component = renderer.create(
-    <SectionHeader text={'Test text'} />
-  );
-
-  let tree = component.toJSON();
-  expect(tree).toMatchSnapshot();
-})
-
-
-describe('Login Component', () => {
-  let component;
+  let output;
+  let props;
 
   beforeEach(() => {
-    component = shallow(<SectionHeader text={'Test text'} />)
+    props = {
+      text: "test text"
+    };
+    output = shallow(<SectionHeader {...props} />);
   });
 
-
-
-  it('should render without throwing an error', () => {
-
-
-  })
+  it('should render correctly', () => {
+    expect(output).toMatchSnapshot();
+  });
 });
+

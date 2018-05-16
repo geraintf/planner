@@ -1,11 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[` 1`] = `
+exports[`SectionHeader should render correctly 1`] = `
 <div
   className="section-header"
 >
   <h2>
-    Test text
+    test text
   </h2>
 </div>
 `;

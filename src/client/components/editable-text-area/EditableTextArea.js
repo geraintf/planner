@@ -18,11 +18,9 @@ export default class EditableTextArea extends Component {
 
   }
 
-
   componentDidMount() {
     this.textArea.current.focus();
   }
-
 
   render() {
     const {

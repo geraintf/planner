@@ -31,6 +31,7 @@ class TodoUtilsMenu extends Component {
   };
 
   handleEdit = () => {
+
     this.props.toggleEditing();
     this.toggle();
   };
@@ -52,7 +53,7 @@ class TodoUtilsMenu extends Component {
         </DropdownToggle>
         <DropdownMenu right>
           <div
-            className="todo-utils-menu__item"
+            className="todo-utils-menu__item edit-item"
             onClick={this.handleEdit}
           >
             <div className="todo-utils-menu__item-icon">
@@ -63,7 +64,7 @@ class TodoUtilsMenu extends Component {
             </div>
           </div>
           <div
-            className="todo-utils-menu__item"
+            className="todo-utils-menu__item remove-item"
             onClick={this.handleRemove}
           >
             <div className="todo-utils-menu__item-icon">
