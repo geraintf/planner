@@ -19,8 +19,8 @@ const browserConfig = {
         use: ['style-loader', 'css-loader']
       },
       {
-        test: /\.less$/,
-        use: ['style-loader', 'css-loader', 'less-loader']
+        test: /\.scss$/,
+        use: ['style-loader', 'css-loader', 'sass-loader']
       },
       {
         test: /js$/,
@@ -63,8 +63,8 @@ const serverConfig = {
         use: ['css-loader']
       },
       {
-        test: /\.less$/,
-        use: ['css-loader', 'less-loader']
+        test: /\.scss$/,
+        use: ['css-loader', 'sass-loader']
       },
     ],
   },

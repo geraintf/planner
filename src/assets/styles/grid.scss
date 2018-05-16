@@ -5,32 +5,32 @@
   height: 100%;
 }
 
-.grid-left-col {
+%grid-left-col {
   grid-column: 1 / span 3;
 }
 
-.grid-main-col {
+%grid-main-col {
   grid-column: 4 / span 5;
 }
 
-.grid-right-col {
+%grid-right-col {
   grid-column: 9 / span 2;
 }
 
 .daily-grid-item {
-  .grid-left-col;
+  @extend %grid-left-col;
 
   grid-row: 1 / span 5;
 }
 
 .weekly-grid-item {
-  .grid-left-col;
+  @extend %grid-left-col;
 
   grid-row: 6 / span 5;
 }
 
 .day-todo-grid-item {
-  .grid-main-col;
+  @extend %grid-main-col;
 
   grid-row: 1 / span 6;
   overflow-y: scroll;
@@ -38,13 +38,13 @@
 }
 
 .day-notes-grid-item {
-  .grid-main-col;
+  @extend %grid-main-col;
 
   grid-row: 7 / span 4;
 }
 
 .calender-grid-item {
-  .grid-right-col;
+  @extend %grid-right-col;
 
   grid-row: 1 / span 10;
 };

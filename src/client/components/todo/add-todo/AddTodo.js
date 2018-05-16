@@ -5,7 +5,7 @@ import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import faPlus from '@fortawesome/fontawesome-free-solid/faPlus';
 import { encodeString } from '../../../../utils/string-utils';
 
-import './AddTodo.less';
+import './AddTodo.scss';
 
 export default class AddTodo extends Component {
   static propTypes = {

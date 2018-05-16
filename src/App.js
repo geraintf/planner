@@ -1,8 +1,7 @@
 import React from 'react';
 import { Switch, Route } from 'react-router';
 
-import 'bootstrap/dist/css/bootstrap.min.css';
-import './assets/styles/base.less';
+import './assets/styles/base.scss';
 
 import routes from './routes';
 

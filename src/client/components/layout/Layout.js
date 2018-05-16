@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import './Layout.less';
+import './Layout.scss';
 
 const Layout = props => (
   <div className="default-layout">

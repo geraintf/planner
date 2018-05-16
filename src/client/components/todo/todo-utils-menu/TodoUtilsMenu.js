@@ -7,7 +7,7 @@ import faAngleDown from '@fortawesome/fontawesome-free-solid/faAngleDown';
 import faEdit from '@fortawesome/fontawesome-free-solid/faEdit';
 import faTimes from '@fortawesome/fontawesome-free-solid/faTimes';
 
-import './TodoUtilsMenu.less';
+import './TodoUtilsMenu.scss';
 import { removeTodo } from '../../../../actions';
 
 class TodoUtilsMenu extends Component {

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import './EditableTextArea.less';
+import './EditableTextArea.scss';
 
 export default class EditableTextArea extends Component {
   static propTypes = {

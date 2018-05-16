@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import './SectionHeader.less';
+import './SectionHeader.scss';
 
 const SectionHeader = ({ text }) => (
   <div className="section-header">
