@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`EditableTextArea should render correctly 1`] = `
+<EditableTextArea
+  onBlur={[Function]}
+  onChange={[Function]}
+  onKeyPress={[Function]}
+  text="test text"
+>
+  <div
+    className="editable-text-area"
+  >
+    <textarea
+      onBlur={[Function]}
+      onChange={[Function]}
+      onKeyPress={[Function]}
+      value="test text"
+    />
+  </div>
+</EditableTextArea>
+`;

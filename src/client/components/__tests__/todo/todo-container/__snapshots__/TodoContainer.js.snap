@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TodoContainer should render correctly 1`] = `
+<React.Fragment>
+  <SortableTodoList
+    items={
+      Array [
+        Object {
+          "completed": true,
+          "id": "123",
+          "text": "some stuff",
+        },
+      ]
+    }
+    moveTodo={[Function]}
+    toggleTodo={[Function]}
+  />
+  <AddTodo
+    addTodo={[Function]}
+  />
+</React.Fragment>
+`;

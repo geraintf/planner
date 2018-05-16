@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TodoList should render correctly 1`] = `
+<ul
+  className="todo-list"
+>
+  <Connect(TodoItem)
+    completed={true}
+    id="fewf"
+    index={0}
+    key="fewf"
+    onClick={[Function]}
+    sortable={false}
+    text="onething"
+  />
+  <Connect(TodoItem)
+    completed={false}
+    id="gfgd"
+    index={1}
+    key="gfgd"
+    onClick={[Function]}
+    sortable={false}
+    text="this is a really long todo so im just adding more words to make it longer, this is a really long todo so im just adding more words to make it longer, this is a really long todo so im just adding more words to make it longer"
+  />
+  <Connect(TodoItem)
+    completed={false}
+    id="fewgfdgf"
+    index={2}
+    key="fewgfdgf"
+    onClick={[Function]}
+    sortable={false}
+    text="onethliling"
+  />
+</ul>
+`;

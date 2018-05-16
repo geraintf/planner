@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TodoItem should render correctly 1`] = `
+<li
+  className="todo-item"
+>
+  <button
+    onClick={[Function]}
+  />
+  <span
+    className="todo-item__content"
+    onDoubleClick={[Function]}
+  >
+    <TodoField />
+  </span>
+  <div
+    className="todo-item__utils"
+  >
+    <Connect(TodoUtilsMenu)
+      todoId="123"
+      toggleEditing={[Function]}
+    />
+    <Component />
+  </div>
+</li>
+`;
