@@ -3,5 +3,6 @@
 server.js
 server.js.map
 public
+dist
 node_modules
 yarn-error.log

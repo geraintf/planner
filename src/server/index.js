@@ -13,6 +13,7 @@ import { Provider } from 'react-redux';
 import getPort from './lib/getPort';
 import { serverStore } from '../configureStores';
 
+import manifestJson from '../../dist/manifest.json';
 
 import Html from '../html';
 import App from '../App';
@@ -21,13 +22,13 @@ const app = express();
 const PORT = getPort();
 const DEV = process.env.NODE_ENV === 'development';
 
-app.use(express.static('public'));
+app.use(express.static('dist'));
 
 if (DEV) {
   app.use(morgan('dev'));
 }
 
-app.get('*', (req, res) => {
+app.get('*', async (req, res) => {
   const store = serverStore({}, req);
 
   const initialState = store.getState();
@@ -41,8 +42,14 @@ app.get('*', (req, res) => {
   );
 
   const html = renderToString(components);
+  const staticMarkup = renderToStaticMarkup(
+    <Html
+      content={html}
+      initialState={initialState}
+      manifest={manifestJson}
+    />);
 
-  res.send(`<!doctype html>\n${renderToStaticMarkup(<Html content={html} initialState={initialState} />)}`);
+  res.send(`<!doctype html>\n${staticMarkup}`);
 });
 
 /* eslint-disable no-console */
