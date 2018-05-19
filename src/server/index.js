@@ -2,23 +2,18 @@ require('dotenv').config();
 
 import 'source-map-support/register';
 import express from 'express';
-import React from 'react';
 import chalk from 'chalk';
 import morgan from 'morgan';
-import { renderToNodeStream } from 'react-dom/server';
-import { StaticRouter } from 'react-router-dom';
-import { Provider } from 'react-redux';
+
+
 import cookieParser from 'cookie-parser';
 import cookieSession from 'cookie-session';
 
 import configurePassport from './lib/configurePassport';
 import getPort from './lib/getPort';
 import { dbConnect } from './lib/db';
-import { serverStore } from '../configureStores';
 
-import manifestJson from '../../dist/manifest.json';
-import Html from '../html';
-import App from '../App';
+import render from './render';
 import router from './routes';
 
 const app = express();
@@ -43,29 +38,7 @@ configurePassport(app);
 
 app.use(router);
 
-app.get('*', async (req, res) => {
-
-  const store = serverStore({}, req);
-
-  const initialState = store.getState();
-  const context = {};
-
-  const components = (
-    <Provider store={store}>
-      <StaticRouter location={req.url} context={context}>
-        <App />
-      </StaticRouter>
-    </Provider>
-  );
-
-  renderToNodeStream(
-    <Html
-      content={components}
-      initialState={initialState}
-      manifest={manifestJson}
-    />
-  ).pipe(res);
-});
+app.get('*', render);
 
 /* eslint-disable no-console */
 app.listen(PORT, () => {
