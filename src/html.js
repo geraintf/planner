@@ -20,7 +20,7 @@ const Html = ({ content, initialState, manifest }) => {
         <link rel="stylesheet" href={cssBundle} type="text/css" />
       </head>
       <body>
-        <div id="root">${ content }</div>
+        <div id="root">{ content }</div>
         <script
           dangerouslySetInnerHTML={{ __html: `window.__initialState__=${JSON.stringify(initialState)};` }} // eslint-disable-line react/no-danger
           charSet="UTF-8"
@@ -32,7 +32,7 @@ const Html = ({ content, initialState, manifest }) => {
 };
 
 Html.propTypes = {
-  content: PropTypes.string.isRequired,
+  content: PropTypes.object.isRequired,
   initialState: PropTypes.object.isRequired,
   manifest: PropTypes.object.isRequired,
 };
