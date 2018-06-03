@@ -53,7 +53,7 @@ app.use(enhanceProps);
 app.use(router);
 
 app.get('/test', async (req, res, next) => {
-  await TodoController.add('5afe123d08150e47c45ee9e1', Date.now(), 'todo');
+  await TodoController.createOrUpdate('5afe123d08150e47c45ee9e1', Date.now(), ['todo1', 'todo1', 'todo1']);
   next();
 });
 

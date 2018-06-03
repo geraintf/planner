@@ -6,7 +6,7 @@ class TodoController {
     this.model = TodoModel;
   }
 
-  add(owner, date, newTodo) {
+  createOrUpdate(owner, date, newTodos) {
     const dateKey = formatTodoDateKey(date);
 
     return this.model
@@ -17,7 +17,8 @@ class TodoController {
           return this.model
             .findByIdAndUpdate(
               existingTodo.id,
-              { $set: { todos: existingTodo.push(newTodo) } }
+              { $set: { todos: newTodos } },
+              { new: true }
             );
         }
 
@@ -25,17 +26,9 @@ class TodoController {
           .create({
             owner,
             date: dateKey,
-            todos: [newTodo]
+            todos: newTodos
           });
       });
-  }
-
-  delete() {
-    //todo
-  }
-
-  edit() {
-    //todo
   }
 }
 
