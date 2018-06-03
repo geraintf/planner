@@ -17,16 +17,16 @@ describe('TodoController', () => {
     await mongoose.connect(mongoUri);
   });
 
-  afterAll((done) => {
+    afterAll((done) => {
     mongoose.disconnect(done);
     mongoServer.stop();
   });
 
-  describe('createOrUpdate', () => {
+  describe('updateTodo', () => {
     describe('given there is no record that the user/day combo', () => {
       it('should create a new entry for that day with the new todo in', (done) => {
         TodoController
-          .createOrUpdate('5afe123d08150e47c45ee9e1', Date.now(), ['todo'])
+          .updateTodo('5afe123d08150e47c45ee9e1', formatTodoDateKey(Date.now()), ['todo'])
           .then((output) => {
             expect(output.owner.toString()).toEqual('5afe123d08150e47c45ee9e1');
             expect(output.date).toBe(formatTodoDateKey(Date.now()));
@@ -39,7 +39,7 @@ describe('TodoController', () => {
     describe('given there IS a record that the user/day combo', () => {
       beforeEach((done) => {
         TodoController
-          .createOrUpdate('5afe123d08150e47c45ee9e1', Date.now(), ['todo1', 'todo2'])
+          .updateTodo('5afe123d08150e47c45ee9e1', formatTodoDateKey(Date.now()), ['todo1', 'todo2'])
           .then(() => done());
       });
 
@@ -47,7 +47,7 @@ describe('TodoController', () => {
       describe('given a new todo has been added', () => {
         it('should add the new todo ', (done) => {
           TodoController
-            .createOrUpdate('5afe123d08150e47c45ee9e1', Date.now(), ['todo1', 'todo2', 'todo3'])
+            .updateTodo('5afe123d08150e47c45ee9e1', formatTodoDateKey(Date.now()), ['todo1', 'todo2', 'todo3'])
             .then((output) => {
               expect(output.owner.toString()).toEqual('5afe123d08150e47c45ee9e1');
               expect(output.date).toBe(formatTodoDateKey(Date.now()));
@@ -60,7 +60,7 @@ describe('TodoController', () => {
       describe('given a todo has been removed', () => {
         it('should remove the todo ', (done) => {
           TodoController
-            .createOrUpdate('5afe123d08150e47c45ee9e1', Date.now(), ['todo1'])
+            .updateTodo('5afe123d08150e47c45ee9e1', formatTodoDateKey(Date.now()), ['todo1'])
             .then((output) => {
               expect(output.owner.toString()).toEqual('5afe123d08150e47c45ee9e1');
               expect(output.date).toBe(formatTodoDateKey(Date.now()));
@@ -73,7 +73,7 @@ describe('TodoController', () => {
       describe('given the order of the todos has changed', () => {
         it('update the order of the todos ', (done) => {
           TodoController
-            .createOrUpdate('5afe123d08150e47c45ee9e1', Date.now(), ['todo2', 'todo1'])
+            .updateTodo('5afe123d08150e47c45ee9e1', formatTodoDateKey(Date.now()), ['todo2', 'todo1'])
             .then((output) => {
               expect(output.owner.toString()).toEqual('5afe123d08150e47c45ee9e1');
               expect(output.date).toBe(formatTodoDateKey(Date.now()));
@@ -81,6 +81,40 @@ describe('TodoController', () => {
             })
             .then(() => done());
         });
+      });
+    });
+  });
+
+  describe('updateComment', () => {
+    describe('given there is no record that the user/day combo', () => {
+      it('should create a new entry for that day with the correct comment in', (done) => {
+        TodoController
+          .updateComment('5afe123d08150e47c45ee9e1', formatTodoDateKey(Date.now()), 'some comment')
+          .then((output) => {
+            expect(output.owner.toString()).toEqual('5afe123d08150e47c45ee9e1');
+            expect(output.date).toBe(formatTodoDateKey(Date.now()));
+            expect(output.comments).toBe('some comment');
+          })
+          .then(() => done());
+      });
+    });
+
+    describe('given there IS a record that the user/day combo', () => {
+      beforeEach((done) => {
+        TodoController
+          .updateComment('5afe123d08150e47c45ee9e1', formatTodoDateKey(Date.now()), 'old comment')
+          .then(() => done());
+      });
+
+      it('should create a new entry for that day with the correct comment in', (done) => {
+        TodoController
+          .updateComment('5afe123d08150e47c45ee9e1', formatTodoDateKey(Date.now()), 'some comment')
+          .then((output) => {
+            expect(output.owner.toString()).toEqual('5afe123d08150e47c45ee9e1');
+            expect(output.date).toBe(formatTodoDateKey(Date.now()));
+            expect(output.comments).toBe('some comment');
+          })
+          .then(() => done());
       });
     });
   });

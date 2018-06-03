@@ -1,6 +1,8 @@
 
 export default (req, res, next) => {
-  req.props = {};
+  req.props = {
+    user: {}
+  };
 
   if (req.user) {
     req.props.user = {

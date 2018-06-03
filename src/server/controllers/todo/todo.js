@@ -1,33 +1,62 @@
 import { TodoModel } from '../../models';
-import { formatTodoDateKey } from "../../../utils/date-utils";
 
 class TodoController {
   constructor() {
     this.model = TodoModel;
   }
 
-  createOrUpdate(owner, date, newTodos) {
-    const dateKey = formatTodoDateKey(date);
-
+  findEntry(owner, dateKey) {
     return this.model
       .findOne()
-      .where({ owner, date: dateKey })
+      .where({ owner, date: dateKey });
+  }
+
+  createEntry(owner, dateKey, todos = [], comments = '') {
+    return this.model
+      .create({
+        owner,
+        date: dateKey,
+        todos,
+        comments
+      });
+  }
+
+  findAndUpdate(id, property, value) {
+    return this.model
+      .findByIdAndUpdate(
+        id,
+        { $set: { [property]: value } },
+        { new: true }
+      );
+  }
+
+  updateTodo(owner, dateKey, newTodos) {
+    return this.findEntry(owner, dateKey)
       .then((existingTodo) => {
         if (existingTodo) {
-          return this.model
-            .findByIdAndUpdate(
-              existingTodo.id,
-              { $set: { todos: newTodos } },
-              { new: true }
-            );
+          return this.findAndUpdate(
+            existingTodo.id,
+            'todos',
+            newTodos
+          );
         }
 
-        return this.model
-          .create({
-            owner,
-            date: dateKey,
-            todos: newTodos
-          });
+        return this.createEntry(owner, dateKey, newTodos);
+      });
+  }
+
+  updateComment(owner, dateKey, commentsContent) {
+    return this.findEntry(owner, dateKey)
+      .then((existingTodo) => {
+        if (existingTodo) {
+          return this.findAndUpdate(
+            existingTodo.id,
+            'comments',
+            commentsContent
+          );
+        }
+
+        return this.createEntry(owner, dateKey, null, commentsContent);
       });
   }
 }

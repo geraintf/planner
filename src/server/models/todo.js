@@ -5,7 +5,8 @@ const { Schema } = mongoose;
 const TodoSchema = new Schema({
   date: String,
   owner: Schema.Types.ObjectId,
-  todos: [String]
+  todos: [String],
+  comments: String
 });
 
 const TodoModel = mongoose.model('Todos', TodoSchema);

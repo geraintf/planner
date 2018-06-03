@@ -10,7 +10,7 @@ const PRODUCTION = ENV === 'production';
 const distPath = path.join(__dirname, 'dist');
 
 const browserConfig = {
-  entry: './src/client/user.js',
+  entry: './src/client/index.js',
   output: {
     path: distPath,
     filename: 'bundle.js'

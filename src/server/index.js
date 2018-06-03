@@ -4,12 +4,6 @@ import 'source-map-support/register';
 import express from 'express';
 import chalk from 'chalk';
 import morgan from 'morgan';
-import { graphqlExpress, graphiqlExpress } from 'apollo-server-express';
-import bodyParser from 'body-parser';
-import { makeExecutableSchema } from 'graphql-tools';
-
-import { TodoController } from './controllers';
-
 
 import cookieParser from 'cookie-parser';
 import expressSession from 'express-session';
@@ -22,23 +16,15 @@ import { dbConnect } from './lib/db';
 import render from './render';
 import router from './routes';
 
-import typeDefs from './schema';
-import resolvers from './resolvers';
-
 const app = express();
 const PORT = getPort();
 const DEV = process.env.NODE_ENV === 'development';
-
-const executableSchema = makeExecutableSchema({ typeDefs, resolvers });
 
 dbConnect();
 
 app.use(express.static('dist'));
 
-app.use('/graphql', bodyParser.json(), graphqlExpress({ schema: executableSchema }));
-
 if (DEV) {
-  app.get('/graphiql', graphiqlExpress({ endpointURL: '/graphql' }));
   app.use(morgan('dev'));
 }
 
@@ -51,11 +37,6 @@ configurePassport(app);
 app.use(enhanceProps);
 
 app.use(router);
-
-app.get('/test', async (req, res, next) => {
-  await TodoController.createOrUpdate('5afe123d08150e47c45ee9e1', Date.now(), ['todo1', 'todo1', 'todo1']);
-  next();
-});
 
 app.get('*', render);
 
