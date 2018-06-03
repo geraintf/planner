@@ -1,19 +1,15 @@
 import passport from 'passport';
 import GoogleStrategy from 'passport-google-oauth20';
 
-import Requests from '../requests';
+import { UserController } from '../controllers';
 
 const Strategy = GoogleStrategy.Strategy;
 
 const configurePassport = (app) => {
-  app.use(passport.initialize());
-  app.use(passport.session());
-
   passport.serializeUser(({ id }, done) => done(null, id));
 
   passport.deserializeUser(async (id, done) => {
-    const user = await Requests.user.findByID(id);
-
+    const user = await UserController.findByID(id);
     done(null, user);
   });
 
@@ -24,15 +20,18 @@ const configurePassport = (app) => {
       callbackURL: '/auth/google/callback'
     },
     async (accessToken, refreshToken, profile, done) => {
-      const userDetails = await Requests.user.createOrRetrieveUser({
-        googleId: profile.id,
-        firstName: profile.name.givenName,
-        secondName: profile.name.familyName
-      });
+      const userDetails = await UserController.createOrRetrieve(
+        profile.id,
+        profile.name.givenName,
+        profile.name.familyName
+      );
 
       done(null, userDetails);
-    }));
-};
+    }
+    ));
 
+  app.use(passport.initialize());
+  app.use(passport.session());
+};
 
 export default configurePassport;

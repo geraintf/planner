@@ -1,5 +1,7 @@
-import User from './user';
+import UserModel from './user';
+import TodoModel from './todo';
 
 export {
-  User
-}
+  UserModel,
+  TodoModel
+};

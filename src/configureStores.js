@@ -4,6 +4,7 @@ import thunk from 'redux-thunk';
 import reducer from './reducers';
 
 const getDefaultState = () => ({
+  user: {},
   todos: [
     { id: 'fewf', text: 'onething', completed: true },
     { id: 'gfgd', text: 'this is a really long todo so im just adding more words to make it longer, this is a really long todo so im just adding more words to make it longer, this is a really long todo so im just adding more words to make it longer', completed: false },
@@ -11,12 +12,12 @@ const getDefaultState = () => ({
 });
 
 const configureStore = (initialState, req = {}) => {
-  const enchancers = composeWithDevTools(applyMiddleware(thunk));
+  const enhancers = composeWithDevTools(applyMiddleware(thunk));
 
   return createStore(
     reducer,
     Object.assign({}, getDefaultState(req), initialState),
-    enchancers,
+    enhancers,
   );
 };
 
