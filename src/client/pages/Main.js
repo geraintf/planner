@@ -4,27 +4,29 @@ import Header from '../components/header/Header';
 import DayTodoContainer from '../containers/todo-for-day';
 import SectionHeader from '../components/section-header/SectionHeader';
 
-/*
-
-  const QUERIES = {
-    'todos': getTodos      reduxname/graphql promise
-  }
-
-
-  reqData([queryA, queryB])
-  - decide what needs to be loaded
-  - builds graphql request
-  - returns promise of it
- */
+import { makeGraphqlReq } from '../../utils/fetch-graphql';
 
 export default class Main extends Component {
-  componentDidMount() {
-    this.fetchData();
+  static fetchData(path) {
+    const query = `query {
+  todo(dateKey: "06/06/2018") {
+    id
+    todos {
+      id
+      text
+      completed
+    }
+    date
+    comments
   }
+}`;
 
-  fetchData() {
-    //return fetchData();
+    return makeGraphqlReq({ query }, path);
   };
+
+  componentDidMount() {
+    this.constructor.fetchData();
+  }
 
   render() {
     return(

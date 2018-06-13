@@ -8,8 +8,14 @@ import { serverStore } from '../configureStores';
 import Html from '../html';
 import App from '../App';
 import routes from '../routes';
+import { getFullUrl } from '../utils/url-utils';
 
 import manifestJson from '../../dist/manifest.json';
+
+const buildInitialState = (req, data = {}) => ({
+  ...(req.props.user && { user: req.props.user }),
+  ...(data.todo && { todos: data.todo.todos })
+});
 
 export default async (req, res) => {
 
@@ -20,7 +26,7 @@ export default async (req, res) => {
 
     if (match) {
       if (typeof route.component.fetchData === 'function') {
-        promises.push(route.component.fetchData);
+        promises.push(route.component.fetchData(getFullUrl(req)));
       }
 
       acc.push(match);
@@ -33,24 +39,22 @@ export default async (req, res) => {
     //404
   }
 
-  const data = await Promise.all(promises);
+  const results = await Promise.all(promises);
 
-  console.log(req.props)
+  const data = (results && results[0].data) || {};
 
-  const store = serverStore({ ...req.props }, req);
+  //todo data is an array with data objects in, maybe want to reduce and merge together
+
+  const store = serverStore(buildInitialState(req, data), req);
 
   const initialState = store.getState();
+
   const context = {};
-
-
-
-
-
 
   const components = (
     <Provider store={store}>
       <StaticRouter location={req.url} context={context}>
-        <App/>
+        <App />
       </StaticRouter>
     </Provider>
   );

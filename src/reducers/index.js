@@ -1,6 +1,8 @@
 import uuidv4 from 'uuid/v4';
 import { arrayMove } from 'react-sortable-hoc';
 
+import { makeGraphqlReq } from '../utils/fetch-graphql';
+
 const toggleTodo = (todos, id) => (
   todos.map(todo => (
     todo.id === id
@@ -20,6 +22,25 @@ const editTodo = (todos, id, newValue) => {
 };
 
 
+const addTodoReq = (newTodo) => {
+  const query = `mutation addTodo($input: AddTodoInput!) {
+    addTodo(input: $input) {
+      id
+      todos {
+        id
+        text
+        completed
+      }
+      date
+      comments
+    }
+  }`;
+  const variables = { input: { dateKey: '06/06/2018', newTodo } };
+  const operationName = 'addTodo';
+  makeGraphqlReq({ query, variables, operationName });
+};
+
+
 export const getDayTodos = state => state.todos;
 
 
@@ -31,15 +52,20 @@ export default function reducer(state = {}, { type, payload }) {
         todos: toggleTodo(state.todos, payload.id)
       };
     case 'ADD_TODO':
+      const newTodo = {
+        id: uuidv4(),
+        text: payload.text,
+        completed: false
+      };
+
+      addTodoReq(newTodo);
+
       return {
         ...state,
         todos: [
           ...state.todos,
-          {
-            id: uuidv4(),
-            text: payload.text,
-            completed: false
-          }]
+          newTodo
+        ]
       };
     case 'REMOVE_TODO':
       return {
