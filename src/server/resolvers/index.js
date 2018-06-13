@@ -22,16 +22,16 @@ const resolvers = {
       return TodoController.deleteTodo("5afe123d08150e47c45ee9e1", dateKey, todoId);
     },
     editTodo: (_, { input: { todoId, todoValue, dateKey } }, { user: { id } }) => {
-      //return TodoController.editTodo(id, dateKey, todoId, todoValue);
+      //return TodoController.editTodo(id, dateKey, todoValue);
       return TodoController.editTodo("5afe123d08150e47c45ee9e1", dateKey, todoId, todoValue);
     },
     toggleTodo: (_, { input: { todoId, dateKey } }, { user: { id } }) => {
       //return TodoController.toggleTodo(id, dateKey, todoId);
       return TodoController.toggleTodo("5afe123d08150e47c45ee9e1", dateKey, todoId);
     },
-    moveTodo: (_, { input: { todoId, dateKey, oldIndex, newIndex } }, { user: { id } }) => {
+    moveTodo: (_, { input: { dateKey, oldIndex, newIndex } }, { user: { id } }) => {
       //return TodoController.moveTodo(id, dateKey, todoId, oldIndex, newIndex);
-      return TodoController.moveTodo("5afe123d08150e47c45ee9e1", dateKey, todoId, oldIndex, newIndex);
+      return TodoController.moveTodo("5afe123d08150e47c45ee9e1", dateKey, oldIndex, newIndex);
     },
     updateComment: (_, { commentContent, dateKey }, { user: { id } }) => {
       //return TodoController.updateComment(id, dateKey, commentContent);

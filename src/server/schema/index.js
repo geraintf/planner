@@ -29,7 +29,6 @@ const typeDefs = `
   
   type Todo {
     id: ID!
-    todoId: String
     date: String
     owner: String
     todos: [TodoItem]
@@ -49,6 +48,7 @@ const typeDefs = `
   }
   
   input AddTodoInputItem {
+    todoId: String
     text: String
     completed: Boolean
   }
@@ -71,7 +71,6 @@ const typeDefs = `
   
   input MoveTodoInput {
     dateKey: String!
-    todoId: String!
     oldIndex: Int!
     newIndex: Int!
   }

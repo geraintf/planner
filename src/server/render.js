@@ -14,7 +14,7 @@ import manifestJson from '../../dist/manifest.json';
 
 const buildInitialState = (req, data = {}) => ({
   ...(req.props.user && { user: req.props.user }),
-  ...(data.todo && { todos: data.todo.todos })
+  ...(data.todo && { todos: { [data.todo.date]: data.todo.todos } })
 });
 
 export default async (req, res) => {

@@ -6,6 +6,11 @@ const opts = {
 };
 
 export const makeGraphqlReq = ({ query, operationName, variables }, path = '') => {
+
+  if(!query) {
+    throw new Error('An invalid query was passed into makeGraphqlReq: ' + query);
+  }
+
   return fetch(`${path}/graphql`, {
     ...opts,
     body: JSON.stringify({ query, operationName, variables })

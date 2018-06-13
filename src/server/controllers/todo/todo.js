@@ -77,7 +77,7 @@ class TodoController {
       });
   }
 
-  moveTodo(owner, dateKey, todoId, oldIndex, newIndex) {
+  moveTodo(owner, dateKey, oldIndex, newIndex) {
     return this.findEntry(owner, dateKey)
       .then((dayEntry) => {
         // TODO: error handling

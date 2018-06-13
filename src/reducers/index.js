@@ -1,7 +1,13 @@
 import uuidv4 from 'uuid/v4';
 import { arrayMove } from 'react-sortable-hoc';
 
-import { makeGraphqlReq } from '../utils/fetch-graphql';
+import {
+  addTodoReq,
+  deleteTodoReq,
+  toggleTodoReq,
+  moveTodoReq,
+  editTodoReq
+} from '../client/requests';
 
 const toggleTodo = (todos, id) => (
   todos.map(todo => (
@@ -21,63 +27,55 @@ const editTodo = (todos, id, newValue) => {
   });
 };
 
-
-const addTodoReq = (newTodo) => {
-  const query = `mutation addTodo($input: AddTodoInput!) {
-    addTodo(input: $input) {
-      id
-      todos {
-        id
-        text
-        completed
-      }
-      date
-      comments
-    }
-  }`;
-  const variables = { input: { dateKey: '06/06/2018', newTodo } };
-  const operationName = 'addTodo';
-  makeGraphqlReq({ query, variables, operationName });
-};
-
-
-export const getDayTodos = state => state.todos;
-
+export const getDayTodos = state => state.todos[state.selectedDate] || [];
 
 export default function reducer(state = {}, { type, payload }) {
   switch (type) {
     case 'TOGGLE_TODO':
+
+      toggleTodoReq(state.selectedDate, payload.id);
       return {
         ...state,
         todos: toggleTodo(state.todos, payload.id)
       };
     case 'ADD_TODO':
       const newTodo = {
-        id: uuidv4(),
+        todoId: uuidv4(),
         text: payload.text,
         completed: false
       };
 
-      addTodoReq(newTodo);
+      addTodoReq(state.selectedDate, newTodo);
 
       return {
         ...state,
-        todos: [
+        todos: {
           ...state.todos,
-          newTodo
-        ]
+          [state.selectedDate]: [...state.todos[state.selectedDate]].concat([newTodo])
+        }
       };
     case 'REMOVE_TODO':
+
+      deleteTodoReq(state.selectedDate, payload.id);
+
       return {
         ...state,
         todos: state.todos.filter(todo => todo.id !== payload.id)
       };
     case 'MOVE_TODO':
+
+      moveTodoReq(state.selectedDate, payload.oldIndex, payload.newIndex);
+
       return {
         ...state,
         todos: arrayMove(state.todos, payload.oldIndex, payload.newIndex)
       };
     case 'EDIT_TODO':
+
+      //TODO request calls everytime something changes - debounce or something
+
+      editTodoReq(state.selectedDate, payload.id, payload.newValue);
+
       return {
         ...state,
         todos: editTodo(state.todos, payload.id, payload.newValue)
