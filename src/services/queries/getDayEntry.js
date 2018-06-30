@@ -4,7 +4,7 @@ const getDayEntry = (date = formatTodoDateKey(Date.now())) => `query {
   todo(dateKey: "${date}") {
     id
     todos {
-      todoId: id
+      todoId
       text
       completed
     }

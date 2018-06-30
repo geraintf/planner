@@ -3,7 +3,7 @@ const syncTodos = () => `mutation syncTodos($input: SyncTodoInput!) {
       id
       date
       todos {
-        todoId: id
+        todoId
         text
         completed
       }
