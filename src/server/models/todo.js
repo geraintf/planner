@@ -4,7 +4,7 @@ const { Schema } = mongoose;
 
 const TodoSchema = new Schema({
   date: String,
-  owner: Schema.Types.ObjectId,
+  owner: { type: Schema.Types.ObjectId, required: true },
   todos: [{
     todoId: String,
     text: String,

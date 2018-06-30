@@ -8,7 +8,7 @@ import faEdit from '@fortawesome/fontawesome-free-solid/faEdit';
 import faTimes from '@fortawesome/fontawesome-free-solid/faTimes';
 
 import './TodoUtilsMenu.scss';
-import { removeTodo } from '../../../../actions';
+import { removeTodo } from '../../../../redux/actions';
 
 class TodoUtilsMenu extends Component {
   static propTypes = {

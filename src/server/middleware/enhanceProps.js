@@ -1,7 +1,8 @@
 
 export default (req, res, next) => {
   req.props = {
-    user: {}
+    user: {},
+    isAuthenticated: req.isAuthenticated()
   };
 
   if (req.user) {

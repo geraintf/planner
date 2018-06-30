@@ -4,7 +4,7 @@ import { renderToNodeStream } from 'react-dom/server';
 import { StaticRouter } from 'react-router-dom';
 import { matchPath } from 'react-router'
 
-import { serverStore } from '../configureStores';
+import { serverStore } from '../redux/configure-stores';
 import Html from '../html';
 import App from '../App';
 import routes from '../routes';
@@ -13,6 +13,7 @@ import { getFullUrl } from '../utils/url-utils';
 import manifestJson from '../../dist/manifest.json';
 
 const buildInitialState = (req, data = {}) => ({
+  ...req.props,
   ...(req.props.user && { user: req.props.user }),
   ...(data.todo && { todos: { [data.todo.date]: data.todo.todos } })
 });
@@ -41,7 +42,9 @@ export default async (req, res) => {
 
   const results = await Promise.all(promises);
 
-  const data = (results && results[0].data) || {};
+  const data = (results.length && results[0].data) || {};
+
+  console.log(data)
 
   //todo data is an array with data objects in, maybe want to reduce and merge together
 

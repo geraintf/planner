@@ -19,7 +19,7 @@ if (DEV) {
 graphqlRouter.use(
   '/graphql',
   bodyParser.json(),
-  graphqlExpress(req => ({ schema: executableSchema, context: { user: req.props.user } }))
+  graphqlExpress(req => { console.log('dsda', req.props);    return { schema: executableSchema, context: { user: req.props.user } }})
 );
 
 export default graphqlRouter;

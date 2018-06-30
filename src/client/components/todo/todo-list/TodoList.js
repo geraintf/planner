@@ -14,9 +14,9 @@ const TodoList = ({
     {
       items.map((itemProps, index) => (
         <TodoItem
-          key={itemProps.id}
+          key={itemProps.todoId}
           {...itemProps}
-          onClick={() => toggleTodo(itemProps.id)}
+          onClick={() => toggleTodo(itemProps.todoId)}
           sortable={sortable}
           index={index}
         />

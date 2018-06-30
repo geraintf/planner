@@ -1,6 +1,8 @@
 import { format } from 'date-fns';
 
-const formatTodoDateKey = date => format(date, 'DD-MM-YYYY').toString();
+const DATE_FORMAT = 'DD-MM-YYYY';
+
+const formatTodoDateKey = date => format(date, DATE_FORMAT).toString();
 
 export {
   formatTodoDateKey

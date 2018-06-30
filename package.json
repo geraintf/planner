@@ -37,6 +37,7 @@
     "bootstrap": "^4.1.1",
     "chalk": "^2.3.2",
     "classnames": "^2.2.5",
+    "connect-mongo": "^2.0.1",
     "cookie-parser": "^1.4.3",
     "cross-env": "^5.1.4",
     "date-fns": "^1.29.0",

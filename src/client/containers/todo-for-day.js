@@ -2,12 +2,12 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import { getDayTodos } from '../../reducers';
+import { getDayTodos } from '../../redux/selectors';
 import {
   toggleTodo,
   addTodo,
   moveTodo
-} from '../../actions';
+} from '../../redux/actions';
 
 import TodoContainer from '../components/todo/todo-container/TodoContainer';
 

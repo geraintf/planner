@@ -4,17 +4,9 @@ const typeDefs = `
     todo(dateKey: String!): Todo 
   }
   
-  type Mutation {  
-    addTodo(input: AddTodoInput!): Todo
-    
-    deleteTodo(input: DeleteTodoInput!): Todo
-    
-    editTodo(input: EditTodoInput!): Todo
-    
-    toggleTodo(input: ToggleTodoInput!): Todo
-    
-    moveTodo(input: MoveTodoInput!): Todo
-    
+  type Mutation {
+    syncTodos(input: SyncTodoInput!): Todo    
+  
     updateComment(
       dateKey: String!
       commentContent: String!
@@ -42,37 +34,15 @@ const typeDefs = `
     completed: Boolean
   }
   
-  input AddTodoInput {
+  input SyncTodoInput {
     dateKey: String!
-    newTodo: AddTodoInputItem!
+    payload: [SyncTodoInputItem]!
   }
   
-  input AddTodoInputItem {
+  input SyncTodoInputItem {
     todoId: String
     text: String
     completed: Boolean
-  }
-  
-  input DeleteTodoInput {
-    dateKey: String!
-    todoId: String!
-  }
-  
-  input ToggleTodoInput {
-    dateKey: String!
-    todoId: String!
-  }
-  
-  input EditTodoInput {
-    dateKey: String!
-    todoId: String!
-    todoValue: String!
-  }
-  
-  input MoveTodoInput {
-    dateKey: String!
-    oldIndex: Int!
-    newIndex: Int!
   }
 `;
 

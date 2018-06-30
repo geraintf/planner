@@ -4,17 +4,15 @@ import Header from '../components/header/Header';
 import DayTodoContainer from '../containers/todo-for-day';
 import SectionHeader from '../components/section-header/SectionHeader';
 
-import queries from '../queries';
-
-import { makeGraphqlReq } from '../../utils/fetch-graphql';
+import { fetchDayTodos } from '../../services/requests';
 
 export default class Main extends Component {
   static fetchData(path) {
-    return makeGraphqlReq({ query: queries.getDayEntry() }, path);
+    return fetchDayTodos(path);
   }
 
   componentDidMount() {
-    this.constructor.fetchData();
+    //this.constructor.fetchData();
   }
 
   render() {

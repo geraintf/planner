@@ -7,7 +7,7 @@ import faLines from '@fortawesome/fontawesome-free-solid/faAlignJustify';
 import faCheck from '@fortawesome/fontawesome-free-solid/faCheck';
 import { SortableElement, SortableHandle } from 'react-sortable-hoc';
 
-import { editTodo } from '../../../../actions';
+import { editTodo } from '../../../../redux/actions';
 import { decodeString } from '../../../../utils/string-utils';
 import './TodoItem.scss';
 import TodoUtilsMenu from "../todo-utils-menu/TodoUtilsMenu";
@@ -20,7 +20,7 @@ class TodoItem extends Component {
     text: PropTypes.string.isRequired,
     onClick: PropTypes.func.isRequired,
     index: PropTypes.number.isRequired,
-    id: PropTypes.string.isRequired
+    todoId: PropTypes.string.isRequired
   };
 
   static defaultProps = {
@@ -34,7 +34,7 @@ class TodoItem extends Component {
 
   toggleEditing = () => this.setState({ editing: !this.state.editing });
 
-  handleEdit = (event) => this.props.editTodo(this.props.id, event.target.value);
+  handleEdit = (event) => this.props.editTodo(this.props.todoId, event.target.value);
 
   handleKeyPress = (event) => {
     if (event.type === 'keypress' && event.key === 'Enter') {
@@ -48,7 +48,7 @@ class TodoItem extends Component {
       completed,
       onClick,
       index,
-      id
+      todoId
     } = this.props;
 
     const TodoField = () => {
@@ -92,7 +92,7 @@ class TodoItem extends Component {
         </span>
 
         <div className="todo-item__utils">
-          <TodoUtilsMenu todoId={id} toggleEditing={this.toggleEditing} />
+          <TodoUtilsMenu todoId={todoId} toggleEditing={this.toggleEditing} />
           <MoveIcon />
         </div>
       </li>

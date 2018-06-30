@@ -1,16 +1,18 @@
-import Pages from './client/pages';
+import React from 'react';
+import { Login, Main } from './client/pages';
+import WithAuthentication from './client/components/with-authentication/WithAuthentication';
 
 const routes = [
   {
     name: 'login',
     path: '/login',
-    component: Pages.Login,
+    component: Login,
     exact: true,
   },
   {
     name: 'main',
     path: '/',
-    component: Pages.Main,
+    component: WithAuthentication(Main),
     exact: true,
   },
 ];

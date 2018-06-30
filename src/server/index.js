@@ -4,7 +4,8 @@ import 'source-map-support/register';
 import express from 'express';
 import chalk from 'chalk';
 import morgan from 'morgan';
-
+import mongoose from 'mongoose';
+import connectMongo from 'connect-mongo';
 import cookieParser from 'cookie-parser';
 import expressSession from 'express-session';
 
@@ -19,6 +20,7 @@ import router from './routes';
 const app = express();
 const PORT = getPort();
 const DEV = process.env.NODE_ENV === 'development';
+const MongoStore = connectMongo(expressSession);
 
 dbConnect();
 
@@ -30,7 +32,12 @@ if (DEV) {
 
 app.use(cookieParser());
 
-app.use(expressSession({ secret: process.env.COOKIE_KEY, resave: true, saveUninitialized: true }));
+app.use(expressSession({
+  secret: process.env.COOKIE_KEY,
+  resave: true,
+  saveUninitialized: true,
+  store: new MongoStore({ mongooseConnection: mongoose.connection })
+}));
 
 configurePassport(app);
 

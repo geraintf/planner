@@ -1,21 +1,16 @@
 import { createStore, applyMiddleware } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
-import reducer from './reducers';
-import { formatTodoDateKey } from './utils/date-utils';
 
-const getDefaultState = () => ({
-  user: {},
-  todos: {},
-  selectedDate: formatTodoDateKey(Date.now())
-});
+import reducer from './reducers';
+import buildDefaultState from './build-default-state';
 
 const configureStore = (initialState, req = {}) => {
   const enhancers = composeWithDevTools(applyMiddleware(thunk));
 
   return createStore(
     reducer,
-    Object.assign({}, getDefaultState(req), initialState),
+    Object.assign({}, buildDefaultState(req), initialState),
     enhancers,
   );
 };
