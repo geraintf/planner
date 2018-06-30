@@ -12,10 +12,11 @@ import { getFullUrl } from '../utils/url-utils';
 
 import manifestJson from '../../dist/manifest.json';
 
+//TODO: tidy this
 const buildInitialState = (req, data = {}) => ({
   ...req.props,
   ...(req.props.user && { user: req.props.user }),
-  ...(data.todo && { todos: { [data.todo.date]: data.todo.todos } })
+  ...(data.todo && { todos: { [data.todo.date]: data.todo.todos }, notes: data.todo.notes })
 });
 
 export default async (req, res) => {

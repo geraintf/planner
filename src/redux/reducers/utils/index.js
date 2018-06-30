@@ -3,7 +3,7 @@ import { arrayMove } from 'react-sortable-hoc';
 
 import { getDayTodos } from '../../selectors';
 
-import { syncDayTodos } from '../../../services/requests';
+import { syncDayTodos, syncNotes } from '../../../services/requests';
 
 export const toggleTodos = (state, todoId) => {
   const toggle = (todos,id) => todos.map(todo => (
@@ -92,5 +92,15 @@ export const editTodo = (state, todoId, newValue) => {
   return {
     ...state,
     todos: updatedTodos
+  };
+};
+
+export const updateNotes = (state, newValue) => {
+
+  syncNotes(state.selectedDate, newValue);
+
+  return {
+    ...state,
+    notes: newValue
   };
 };

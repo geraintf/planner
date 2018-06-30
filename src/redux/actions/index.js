@@ -1,4 +1,5 @@
 
+const UPDATE_NOTES = 'UPDATE_NOTES';
 const TOGGLE_TODO = 'TOGGLE_TODO';
 const ADD_TODO = 'ADD_TODO';
 const REMOVE_TODO = 'REMOVE_TODO';
@@ -6,12 +7,20 @@ const MOVE_TODO = 'MOVE_TODO';
 const EDIT_TODO = 'EDIT_TODO';
 
 const actionTypes = {
+  UPDATE_NOTES,
   TOGGLE_TODO,
   ADD_TODO,
   REMOVE_TODO,
   MOVE_TODO,
   EDIT_TODO
 };
+
+const updateNotes = newValue => ({
+  type: UPDATE_NOTES,
+  payload: {
+    newValue
+  }
+});
 
 const toggleTodo = id => ({
   type: TOGGLE_TODO,
@@ -51,6 +60,7 @@ const editTodo = (id, newValue) => ({
 });
 
 export {
+  updateNotes,
   toggleTodo,
   addTodo,
   removeTodo,

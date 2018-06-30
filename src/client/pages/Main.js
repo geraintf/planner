@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Layout from '../components/layout/Layout';
 import Header from '../components/header/Header';
 import DayTodoContainer from '../containers/todo-for-day';
+import NotesContainer from '../containers/notes';
 import SectionHeader from '../components/section-header/SectionHeader';
 
 import { fetchDayTodos } from '../../services/requests';
@@ -32,7 +33,7 @@ export default class Main extends Component {
             <DayTodoContainer />
           </div>
           <div className="day-notes-grid-item">
-            <textarea />
+            <NotesContainer />
           </div>
 
           <div className="calender-grid-item">

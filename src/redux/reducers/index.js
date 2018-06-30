@@ -5,7 +5,8 @@ import {
   addTodo,
   removeTodo,
   moveTodo,
-  editTodo
+  editTodo,
+  updateNotes
 } from './utils';
 
 export default function reducer(state = {}, { type, payload }) {
@@ -31,6 +32,11 @@ export default function reducer(state = {}, { type, payload }) {
       //TODO request calls everytime something changes - debounce or something
 
       return editTodo(state, payload.id, payload.newValue);
+
+
+    case actionTypes.UPDATE_NOTES:
+
+      return updateNotes(state, payload.newValue);
 
     default:
       return state;

@@ -11,30 +11,38 @@ class TodoController {
       .where({ owner, date: dateKey });
   }
 
-  createEntry(owner, dateKey, todos = [], comments = '') {
+  createEntry(owner, dateKey, { todos = [], notes = '' }) {
     return this.model
       .create({
         owner,
         date: dateKey,
         todos,
-        comments
+        notes
       });
   }
 
-  sync(owner, dateKey, payload) {
+  sync(owner, dateKey, property, value) {
     return this.findEntry(owner, dateKey)
       .then((dayEntry) => {
         if (dayEntry) {
           return this.model
             .findByIdAndUpdate(
               dayEntry.id,
-              { todos: payload },
+              { [property]: value },
               { new: true }
             );
         }
 
-        return this.createEntry(owner, dateKey, payload);
+        return this.createEntry(owner, dateKey, { [property]: value });
       });
+  }
+
+  syncTodos(owner, dateKey, value) {
+    return this.sync(owner, dateKey, 'todos', value);
+  }
+
+  syncNotes(owner, dateKey, value) {
+    return this.sync(owner, dateKey, 'notes', value);
   }
 }
 

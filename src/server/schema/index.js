@@ -7,10 +7,7 @@ const typeDefs = `
   type Mutation {
     syncTodos(input: SyncTodoInput!): Todo    
   
-    updateComment(
-      dateKey: String!
-      commentContent: String!
-    ) : Todo
+    syncNotes(input: SyncNotesInput!) : Todo
   }
   
   type User { 
@@ -24,7 +21,7 @@ const typeDefs = `
     date: String
     owner: String
     todos: [TodoItem]
-    comments: String
+    notes: String
   }
   
   type TodoItem {
@@ -43,6 +40,11 @@ const typeDefs = `
     todoId: String
     text: String
     completed: Boolean
+  }
+  
+  input SyncNotesInput {
+    dateKey: String!
+    content: String!
   }
 `;
 

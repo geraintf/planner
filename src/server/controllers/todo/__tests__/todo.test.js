@@ -93,7 +93,7 @@ describe('TodoController', () => {
           .then((output) => {
             expect(output.owner.toString()).toEqual('5afe123d08150e47c45ee9e1');
             expect(output.date).toBe(formatTodoDateKey(Date.now()));
-            expect(output.comments).toBe('some comment');
+            expect(output.notes).toBe('some comment');
           })
           .then(() => done());
       });
@@ -112,7 +112,7 @@ describe('TodoController', () => {
           .then((output) => {
             expect(output.owner.toString()).toEqual('5afe123d08150e47c45ee9e1');
             expect(output.date).toBe(formatTodoDateKey(Date.now()));
-            expect(output.comments).toBe('some comment');
+            expect(output.notes).toBe('some comment');
           })
           .then(() => done());
       });

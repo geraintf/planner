@@ -10,7 +10,7 @@ const TodoSchema = new Schema({
     text: String,
     completed: Boolean
   }],
-  comments: String
+  notes: String
 });
 
 const TodoModel = mongoose.model('Todos', TodoSchema);
