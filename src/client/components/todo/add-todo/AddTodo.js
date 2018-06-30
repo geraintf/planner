@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Input, Button } from 'reactstrap';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import faPlus from '@fortawesome/fontawesome-free-solid/faPlus';
-import { encodeString } from '../../../../utils/string-utils';
+import { encodeString } from 'src/utils/string-utils';
 
 import './AddTodo.scss';
 

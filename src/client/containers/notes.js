@@ -2,9 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import Notes from '../components/notes/Notes';
-import { getNotes } from '../../redux/selectors';
-import { updateNotes } from '../../redux/actions';
+import Notes from 'components/notes/Notes';
+import { getNotes } from 'src/redux/selectors';
+import { updateNotes } from 'src/redux/actions';
 
 
 const mapStateToProps = state => ({

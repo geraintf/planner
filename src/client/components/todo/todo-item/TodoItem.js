@@ -7,11 +7,11 @@ import faLines from '@fortawesome/fontawesome-free-solid/faAlignJustify';
 import faCheck from '@fortawesome/fontawesome-free-solid/faCheck';
 import { SortableElement, SortableHandle } from 'react-sortable-hoc';
 
-import { editTodo } from '../../../../redux/actions';
-import { decodeString } from '../../../../utils/string-utils';
+import { editTodo } from 'src/redux/actions';
+import { decodeString } from 'src/utils/string-utils';
 import './TodoItem.scss';
 import TodoUtilsMenu from "../todo-utils-menu/TodoUtilsMenu";
-import EditableTextArea from '../../editable-text-area/EditableTextArea';
+import EditableTextArea from 'components/editable-text-area/EditableTextArea';
 
 class TodoItem extends Component {
   static propTypes = {

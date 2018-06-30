@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { getIsAuthenticated } from '../../../redux/selectors';
+import { getIsAuthenticated } from 'src/redux/selectors';
 
 const WithAuthentication = (Component) => {
   const AuthenticatedContainer = ({ isAuthenticated, ...props }) =>

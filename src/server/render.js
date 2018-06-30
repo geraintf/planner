@@ -45,8 +45,6 @@ export default async (req, res) => {
 
   const data = (results.length && results[0].data) || {};
 
-  console.log(data)
-
   //todo data is an array with data objects in, maybe want to reduce and merge together
 
   const store = serverStore(buildInitialState(req, data), req);

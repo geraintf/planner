@@ -1,6 +1,6 @@
 import React from 'react';
 import { Login, Main } from './client/pages';
-import WithAuthentication from './client/components/with-authentication/WithAuthentication';
+import WithAuthentication from 'components/with-authentication/WithAuthentication';
 
 const routes = [
   {

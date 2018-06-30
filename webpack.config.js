@@ -9,7 +9,19 @@ const PRODUCTION = ENV === 'production';
 
 const distPath = path.join(__dirname, 'dist');
 
+
+const commonConfig = {
+  mode: PRODUCTION ? 'production' : 'development',
+  resolve: {
+    alias: {
+      src: path.resolve('src'),
+      components: path.resolve('src/client/components')
+    }
+  }
+};
+
 const browserConfig = {
+  ...commonConfig,
   entry: './src/client/index.js',
   output: {
     path: distPath,
@@ -21,7 +33,6 @@ const browserConfig = {
       chunks: "initial",
     },
   },
-  mode: PRODUCTION ? 'production' : 'development',
   devtool: 'cheap-module-source-map',
   module: {
     rules: [
@@ -55,10 +66,10 @@ const browserConfig = {
 };
 
 const serverConfig = {
+  ...commonConfig,
   entry: './src/server/index.js',
   target: 'node',
   externals: [nodeExternals()],
-  mode: PRODUCTION ? 'production' : 'development',
   output: {
     path: __dirname,
     filename: 'server.js',

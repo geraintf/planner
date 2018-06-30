@@ -1,5 +1,5 @@
 import queries from "../queries";
-import { makeGraphqlReq } from "../../utils/fetch-graphql";
+import { makeGraphqlReq } from "src/utils/fetch-graphql";
 
 const syncNotes = (dateKey, content) => {
   const variables = { input: { dateKey, content } };

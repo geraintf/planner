@@ -1,4 +1,4 @@
-import { formatTodoDateKey } from '../../utils/date-utils';
+import { formatTodoDateKey } from 'src/utils/date-utils';
 
 const getDayEntry = (date = formatTodoDateKey(Date.now())) => `query {
   todo(dateKey: "${date}") {

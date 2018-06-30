@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { SortableContainer } from 'react-sortable-hoc';
 
 import TodoList from './todo-list/TodoList';
 
-import { SortableContainer } from 'react-sortable-hoc';
 
 const SortableList = SortableContainer((props) => <TodoList { ...props} sortable />);
 

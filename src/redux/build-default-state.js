@@ -1,4 +1,4 @@
-import { formatTodoDateKey } from '../utils/date-utils';
+import { formatTodoDateKey } from 'src/utils/date-utils';
 
 export default () => ({
   user: {},

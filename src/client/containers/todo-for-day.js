@@ -7,9 +7,9 @@ import {
   toggleTodo,
   addTodo,
   moveTodo
-} from '../../redux/actions';
+} from 'src/redux/actions';
 
-import TodoContainer from '../components/todo/todo-container/TodoContainer';
+import TodoContainer from 'components/todo/todo-container/TodoContainer';
 
 const mapStateToProps = state => ({
   todos: getDayTodos(state)

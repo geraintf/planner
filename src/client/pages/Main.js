@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import Layout from '../components/layout/Layout';
-import Header from '../components/header/Header';
-import DayTodoContainer from '../containers/todo-for-day';
-import NotesContainer from '../containers/notes';
-import SectionHeader from '../components/section-header/SectionHeader';
+import Layout from 'components/layout/Layout';
+import Header from 'components/header/Header';
+import SectionHeader from 'components/section-header/SectionHeader';
+import DayTodoContainer from 'src/client/containers/todo-for-day';
+import NotesContainer from 'src/client/containers/notes';
 
-import { fetchDayTodos } from '../../services/requests';
+import { fetchDayTodos } from 'src/services/requests';
 
 export default class Main extends Component {
   static fetchData(path) {

@@ -1,9 +1,9 @@
 import uuidv4 from 'uuid/v4';
 import { arrayMove } from 'react-sortable-hoc';
 
-import { getDayTodos } from '../../selectors';
+import { getDayTodos } from 'src/redux/selectors';
 
-import { syncDayTodos, syncNotes } from '../../../services/requests';
+import { syncDayTodos, syncNotes } from 'src/services/requests';
 
 export const toggleTodos = (state, todoId) => {
   const toggle = (todos,id) => todos.map(todo => (
